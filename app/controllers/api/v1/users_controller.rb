@@ -1,3 +1,5 @@
+require 'pry'
+
 class Api::V1::UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :update, :destroy]
@@ -55,6 +57,8 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password_digest, :api_token, :city, :cp)
+      # params.require(:user).permit(:email, :password_digest, :api_token, :city, :cp)
+      params.require(:user).permit(:email, :city, :cp, :password)
+
     end
 end
