@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'active_model_serializers', '~> 0.8.0'
+
 gem 'pry'
 
 gem 'pg'
