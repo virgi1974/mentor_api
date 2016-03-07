@@ -1,4 +1,5 @@
-class ConversationsController < ApplicationController
+class Api::V1::ConversationsController < ApplicationController
+
   before_action :set_conversation, only: [:show, :update, :destroy]
 
   # GET /conversations
