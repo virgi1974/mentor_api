@@ -1,0 +1,7 @@
+
+
+rails-api g scaffold user email:string password_digest:string api_token:string city:string cp:integer
+
+rails-api g scaffold conversation title:string body:text user:references
+
+rails-api g scaffold comment body:text user:references conversation:references

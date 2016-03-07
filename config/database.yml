@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: mentor_development
+
+test:
+  <<: *default
+  database: mentor_test
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: mentor_production
