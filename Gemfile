@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.2.1'
 
+gem 'unicorn'
+
 gem 'active_model_serializers', '~> 0.9.0'
 
 gem 'pry'
