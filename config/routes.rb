@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  namespace :api, defaults: { format: :json }, path: '/api-mentor'  do 
+  namespace :api, defaults: { format: :json }, path: ''  do 
     scope module: :v1 do
       resources :users, except: [:new, :edit] do
         resources :conversations, except: [:new, :edit] do
