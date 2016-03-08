@@ -19,9 +19,15 @@ we send our basic authorization previous base64 encoding of email:password
 1/ get TOKEN --> curl http://127.0.0.1:3000/token -H 'Authorization: Basic dmlyZ2lmcEB5YWhvby5lczpBcmlTZWxlMjAxNQ=='
 
 it sends us back the token to be used in every request
-2/ send API_KEY --> curl http://localhost:3000/api-mentor/users/1 -H 'Authorization: Token token=daecbbd52360d5fce912a9415923dfe5'
+2/ send API_KEY --> curl http://localhost:3000/api-mentor/users/9/conversations -H 'Authorization: Token token=90936ee662c460cea6450c918178d553'
 
 3/ from here in every request we need to add the token in the headers of the request
 curl -X DELETE -H 'Authorization: Token token=daecbbd52360d5fce912a9415923dfe5' "http://localhost:3000/api-mentor/users/1" 
+
+
+POST --> to create users
+  curl --data "email=vir@yea.com&city=barna&cp=28042&password=pepitogrillo" http://localhost:3000/api-mentor/users
+
+  curl --form "user.email=vir@yea.com&user.city=barna&user.cp=28042&user.password=pepitogrillo" http://localhost:3000/api-mentor/users
 
 

@@ -18,14 +18,10 @@ class ApplicationController < ActionController::API
     def token
 
       authenticate_with_http_basic do |email, password|
-              binding.pry
-
         user = User.find_by(email: email)
         if user &&  user.authenticate(password) 
-binding.pry
           render json: { token: user.api_token }
         else
-binding.pry
           render json: { error: 'Incorrect credentials' }, status: 401
         end
 
@@ -39,9 +35,7 @@ binding.pry
 
   # curl -H "Authorization: Token token=ead69cc668a226154f72cfa03f866cc6" http://localhost:3000/posts/1
     def authenticate_user_from_token
-      binding.pry
-      unless authenticate_with_http_token { |token, options|        binding.pry
-User.find_by(api_token: token) }
+      unless authenticate_with_http_token { |token, options|  User.find_by(api_token: token) }
         render json: { error: 'Bad Token'}, status: 401
       end
     end
@@ -54,10 +48,12 @@ User.find_by(api_token: token) }
       comment_id = params[:id]
       author_id = choose_class(name,comment_id)
 
-      api_token = request.env["HTTP_AUTHORIZATION"].split("=").last[0..-1]
+  binding.pry
+      api_token = request.env["HTTP_AUTHORIZATION"].split("=").last[0..31]
       author_request_id = User.find_by(api_token: api_token).id
 
       unless author_id == author_request_id
+  binding.pry
         render json: { error: 'user not allowed for this action'}, status: 401
       end
     end

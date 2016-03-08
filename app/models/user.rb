@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :conversations
   has_many :comments
 
+  accepts_nested_attributes_for :conversations,:comments, allow_destroy: true
+
   has_secure_password
 
   validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
@@ -17,5 +19,5 @@ class User < ActiveRecord::Base
 
   before_create -> { self.api_token = SecureRandom.hex }
 
-  
+
 end
