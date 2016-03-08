@@ -16,4 +16,6 @@ class User < ActiveRecord::Base
   validates :password_digest, uniqueness: true
 
   before_create -> { self.api_token = SecureRandom.hex }
+
+  
 end
