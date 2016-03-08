@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
  get :token, controller: 'application'
 
+ root :to => "users#index"
+
 end

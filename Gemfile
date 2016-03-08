@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.1'
+
 gem 'active_model_serializers', '~> 0.9.0'
 
 gem 'pry'
@@ -28,3 +30,7 @@ end
 
 
 gem 'rails_12factor', group: :production
+
+# group :production do
+#   gem 'pg'
+# end
