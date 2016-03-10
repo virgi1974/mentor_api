@@ -8,8 +8,8 @@ class ApplicationController < ActionController::API
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
 
-    after_filter :cors_set_access_control_headers
-    before_filter :cors_preflight_check
+    # after_filter :cors_set_access_control_headers
+    # before_filter :cors_preflight_check
 
     before_filter :authenticate_user_from_token, except: [:token]
 
@@ -17,31 +17,35 @@ class ApplicationController < ActionController::API
     # to the update/destroy actions ONLY for the author of the post/comment...
     before_action :check_self_user_from_token, except: [:token,:index,:show,:create]
 
+    before_filter :set_access_control_headers
 
+    def set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+    end
 
     # For all responses in this controller, return the CORS access control headers.
 
-    def cors_set_access_control_headers
-      headers['Access-Control-Allow-Origin'] = '*'
-      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-      headers['Access-Control-Allow-Headers'] = '*'
-      headers['Access-Control-Max-Age'] = "1728000"
-    end
+    # def cors_set_access_control_headers
+    #   headers['Access-Control-Allow-Origin'] = '*'
+    #   headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+    #   headers['Access-Control-Allow-Headers'] = '*'
+    #   headers['Access-Control-Max-Age'] = "1728000"
+    # end
 
-    # If this is a preflight OPTIONS request, then short-circuit the
-    # request, return only the necessary headers and return an empty
-    # text/plain.
+    # # If this is a preflight OPTIONS request, then short-circuit the
+    # # request, return only the necessary headers and return an empty
+    # # text/plain.
 
-    def cors_preflight_check
-      if request.method == :options
-        headers['Access-Control-Request-Method'] = '*'
-        headers['Access-Control-Allow-Origin'] = '*'
-        headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
-        headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        headers['Access-Control-Max-Age'] = '1728000'
-        render :text => '', :content_type => 'text/plain'
-      end
-    end
+    # def cors_preflight_check
+    #   if request.method == :options
+    #     headers['Access-Control-Request-Method'] = '*'
+    #     headers['Access-Control-Allow-Origin'] = '*'
+    #     headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
+    #     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    #     headers['Access-Control-Max-Age'] = '1728000'
+    #     render :text => '', :content_type => 'text/plain'
+    #   end
+    # end
 
   # action to get an api_token from the client side, by sending our email+password
   # previously we should have created a registered user
