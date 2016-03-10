@@ -68,8 +68,6 @@ class ApplicationController < ActionController::API
 
   # curl -H "Authorization: Token token=ead69cc668a226154f72cfa03f866cc6" http://localhost:3000/posts/1
     def authenticate_user_from_token
-
-        binding.pry
       unless authenticate_with_http_token { |token, options|  User.find_by(api_token: token) }
         render json: { error: 'Bad Token'}, status: 401
       end
