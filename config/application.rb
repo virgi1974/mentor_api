@@ -9,14 +9,17 @@ Bundler.require(*Rails.groups)
 module Mentor
   class Application < Rails::Application
 
-    config.middleware.use Rack::Cors do
-      allow do
-        origins 'http://localhost:8000'
-        resource %r{/pokemon/\d+/comments/\d+},
-          :headers => ['Origin, X-Requested-With, Content-Type, Accept, Authorization'],
-          :methods => [:delete]
-      end
-    end
+    config.action_dispatch.default_headers = {
+       'Access-Control-Allow-Origin' => '*',
+       'Access-Control-Request-Method' => '*'
+    }
+
+   config.middleware.use Rack::Cors do
+     allow do
+       origins '*'
+       resource '*', :headers => :any, :methods => [:get, :post, :put, :options]
+     end
+   end
 
     # config.action_dispatch.default_headers.merge!({
     #     'Access-Control-Allow-Origin' => '*',
