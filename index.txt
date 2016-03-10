@@ -39,3 +39,4 @@ POST --> to create users
 
 ---------
 curl http://localhost:3000/users  -H 'Authorization: Token token=194caa253ecf21e494cbe2f07b353b4a'
+curl https://api-mentor.herokuapp.com/token -H 'Authorization: Basic dmlyZ2lmcEB5YWhvby5lczpBcmlTZWxlMjAxNQ=='
